@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>Order Shirt</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://3b6f713d.ngrok.io/libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://3b6f713d.ngrok.io/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="https://3b6f713d.ngrok.io/assets/css/style.css">
+
+	<!-- JS -->
+	<script src="https://3b6f713d.ngrok.io/libs/jquery/dist/jquery.min.js"></script>
+	<script src="https://3b6f713d.ngrok.io/libs/angular/angular.min.js"></script>
+	<script src="https://3b6f713d.ngrok.io/libs/angular-route/angular-route.min.js"></script>
+	<script src="https://3b6f713d.ngrok.io/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="https://3b6f713d.ngrok.io/libs/ng-scrollbars/dist/scrollbars.min.js"></script>
+
+	<!-- ANGULAR CUSTOM -->
+	<script src="https://3b6f713d.ngrok.io/js/controllers/MainCtrl.js"></script>
+	<script src="https://3b6f713d.ngrok.io/js/appRoutes.js"></script>
+	<script src="https://3b6f713d.ngrok.io/js/appDirectives.js"></script>
+	<script src="https://3b6f713d.ngrok.io/js/appFactories.js"></script>
+	<script src="https://3b6f713d.ngrok.io/js/app.js"></script>
+
+</head>
+<body ng-app="shirtApp" ng-controller="MainController">
+	<header>
+		<ul class="site-nav">
+			<div class="logo">
+				<a href="#">
+					<img ng-src="{{baseUrl}}assets/img/logo.png" />
+				</a>
+			</div>
+			<li>
+				<a href="#">HOW IT WORKS</a>
+			</li>
+			<li>
+				<a href="#">ABOUT US</a>
+			</li>
+			<li>
+				<a href="#">FAQ</a>
+			</li>
+			<li>
+				<a href="#">MY ACCOUNT</a>
+			</li>
+			<li>
+				<a href="#">CART</a>
+			</li>
+			<li>
+				<a href="#">BUILD SHOP</a>
+			</li>
+		</ul>
+	</header>
+	<div class="content-wrapper">
+		<div class="container step-wrap" ng-show="!designStepView">
+			<div id="step-view">
+				<div class="heading">
+					<div class="next-step" ng-click="goNextStep()"><i class="glyphicon glyphicon-menu-left"></i></div>
+					<div class="title" ng-show="qualityStepView || (!fabricStepView && !designStepView && !measureStepView)">
+						<h1 class="engravers"><img ng-src="{{baseUrl}}assets/img/icon_quality.png"><span>STEP ONE : CHOOSE A QUALITY</span></h1>
+						<p>START building by following each step.</p>
+					</div>
+					<div class="title" ng-show="fabricStepView">
+						<h1 class="engravers"><img ng-src="{{baseUrl}}assets/img/icon_fabric.png"><span>STEP TWO : CHOOSE A FABRIC</span></h1>
+						<p>find the perfect fabric choice for your shirt.</p>
+					</div>
+					<div class="title" ng-show="measureStepView">
+						<h1 class="engravers"><img ng-src="{{baseUrl}}assets/img/icon_measure.png"><span>STEP FOUR : ADD MEASUREMENTS</span></h1>
+						<p>find the perfect fabric choice for your shirt.</p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="steps">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="numeric text-center" ng-class="{active: qualityStepShown}" ng-click="toggleQualityStep()"><span>1</span></div>
+							<div class="text-center"><img ng-src="{{baseUrl}}assets/img/icon_quality.png"></div>
+							<div class="text-center"><p class="engravers">CHOOSE A QUALITY<br> OF SHIRT</p></div>
+						</div>
+						<div class="col-md-3">
+							<div class="numeric text-center" ng-class="{active: fabricStepShown}" ng-click="toggleFabricStep()"><span>2</span></div>
+							<div class="text-center"><img ng-src="{{baseUrl}}assets/img/icon_fabric.png"></div>
+							<div class="text-center"><p class="engravers">CHOOSE THE<br> FABRIC</p></div>
+						</div>
+						<div class="col-md-3">
+							<div class="numeric text-center" ng-class="{active: designStepShown}" ng-click="toggleDesignStep()"><span>3</span></div>
+							<div class="text-center"><img ng-src="{{baseUrl}}assets/img/icon_design.png"></div>
+							<div class="text-center"><p class="engravers">DESIGN<br> THE SHIRT</p></div>
+						</div>
+						<div class="col-md-3">
+							<div class="numeric text-center" ng-class="{active: measureStepShown}" ng-click="toggleMeasureStep()"><span>4</span></div>
+							<div class="text-center"><img ng-src="{{baseUrl}}assets/img/icon_measure.png"></div>
+							<div class="text-center"><p class="engravers">ADD<br> MEASUREMENTS</p></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="step1" class="step" ng-show="qualityStepView || (!fabricStepView && !designStepView && !measureStepView)">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="panel panel-default" ng-class="{active: valQuality=='starter'}" ng-click="selectQuality('starter')">
+						  <div class="panel-heading">
+						    <h3 class="panel-title text-center">STARTER</h3>
+						  </div>
+						  <div class="panel-body">
+						    <h4>FABRICS AVAILABLE: 89</h4>
+						    <h4>STARTS AT: $79 usd</h4>
+						    <h4>MADE IN THILAND</h4>
+						    <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </h4>
+						  </div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default" ng-class="{active: valQuality=='standard'}" ng-click="selectQuality('standard')">
+						  <div class="panel-heading">
+						    <h3 class="panel-title text-center">STANDARD</h3>
+						  </div>
+						  <div class="panel-body">
+						    <h4>FABRICS AVAILABLE: 160</h4>
+						    <h4>STARTS AT: $170 usd</h4>
+						    <h4>MADE IN FRANCE</h4>
+						    <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </h4>
+						  </div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default" ng-class="{active: valQuality=='superior'}" ng-click="selectQuality('superior')">
+						  <div class="panel-heading">
+						    <h3 class="panel-title text-center">SUPERIOR</h3>
+						  </div>
+						  <div class="panel-body">
+						    <h4>FABRICS AVAILABLE: 241</h4>
+						    <h4>STARTS AT: $320 usd</h4>
+						    <h4>MADE IN FRANCE</h4>
+						    <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, </h4>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="step2" class="step" ng-show="fabricStepView">
+				<div class="row heading">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<a href="javascript:;" class="active">SOLIDS</a>
+					</div>
+					<div class="col-md-2">
+						<a href="javascript:;">PATTERNED</a>
+					</div>
+					<div class="col-md-2">
+						<a href="javascript:;">A-Z</a>
+					</div>
+					<div class="col-md-2">
+						<a href="javascript:;">POPULAR</a>
+					</div>
+					<div class="col-md-3">
+						<i class="glyphicon glyphicon-search"></i>
+						<input type="text" name="">
+					</div>
+				</div>
+				<div ng-scrollbars ng-scrollbars-config="scBarConfig">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-9 fabric-row" ng-repeat="fabric in fabrics track by $index">
+								<img src="{{fabric.image}}">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="step4" class="step" ng-show="measureStepView">
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<ul>
+							<li><p>measure yourself <i class="glyphicon glyphicon-menu-right"></i></p></li>
+							<li><p>know your sizes? <i class="glyphicon glyphicon-menu-right"></i></p></li>
+							<li><p>edit from standard <i class="glyphicon glyphicon-menu-right"></i></p></li>
+							<li><p>measure a shirt <i class="glyphicon glyphicon-menu-right"></i></p></li>
+						</ul>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid design-wrap" ng-show="designStepView">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="row">
+						<div class="col-md-12">
+							<p class="small"><span class="number">3</span> Design your shirt:</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12"><span class="btn-design-step" ng-class="{active: stepCollar}" ng-click="toggleStyleStep('Collar')">Collar</span></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12"><span class="btn-design-step" ng-class="{active: stepCuffs}" ng-click="toggleStyleStep('Cuffs')">Cuffs</span></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12"><span class="btn-design-step" ng-class="{active: stepFront}" ng-click="toggleStyleStep('Front')">Front</span></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12"><span class="btn-design-step" ng-class="{active: stepBack}" ng-click="toggleStyleStep('Back')">Back</span></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12"><span class="btn-design-step" ng-class="{active: stepButtons}" ng-click="toggleStyleStep('Buttons')">Buttons</span></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12"><span class="btn-design-step" ng-class="{active: stepExtras}" ng-click="toggleStyleStep('Extras')">Extras</span></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="next-step" ng-click="toggleMeasureStep()">
+								<i class="glyphicon glyphicon-menu-left"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<!-- Start Collar style -->
+					<div class="styles collar-view" ng-show="styleView=='Collar'">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">COLLAR STYLE</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="collar_style" checked="checked">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/button-down-collar.png">
+									</div>
+									<p class="small help">button down collar</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="collar_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cut-away-collar.png">
+									</div>
+									<p class="small help">cut away collar</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="collar_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/concealed-button-down-collar.png">
+									</div>
+									<p class="small help">concealed button down collar</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="collar_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/full-cut-away-collar.png">
+									</div>
+									<p class="small help">full cut away collar</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="collar_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/classic-collar.png">
+									</div>
+									<p class="small help">classic collar</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="collar_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/wing-collar.png">
+									</div>
+									<p class="small help">wing collar</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">COLLAR HEIGHT</p>
+							</div>
+							<div class="col-md-6">
+								<label>
+									standard
+									<input type="radio" checked="checked" name="collar_height">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									tall
+									<input type="radio" name="collar_height">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">COLLAR STIFFNESS</p>
+							</div>
+							<div class="col-md-6">
+								<label>
+									standard
+									<input type="radio" checked="checked" name="collar_stiffness">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									stiff
+									<input type="radio" name="collar_stiffness">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="next-style" ng-click="toggleStyleStep('Cuffs')">
+									<span>next</span>
+									<i class="glyphicon glyphicon-menu-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Collar style -->
+
+					<!-- Start Cuffs style -->
+					<div class="styles cuffs-view" ng-show="styleView=='Cuffs'">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">CUFF PREFERANCE</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/square-cuff.png">
+									</div>
+									<p class="small help">square cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/round-cuff.png">
+									</div>
+									<p class="small help">round cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/bevelled-cuff.png">
+									</div>
+									<p class="small help">bevelled cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/one-button-cuff.png">
+									</div>
+									<p class="small help">one button cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/two-button-cuff.png">
+									</div>
+									<p class="small help">two button cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/adjustable-cuff.png">
+									</div>
+									<p class="small help">adjustable cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/double-cuff.png">
+									</div>
+									<p class="small help">double cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/rounded-double-cuff.png">
+									</div>
+									<p class="small help">rounded double cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/button-and-cuff-link.png">
+									</div>
+									<p class="small help">button and cuff link</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">SLEEVE TAB BUTTONS <i class="glyphicon glyphicon-question-sign"></i></p>
+							</div>
+							<div class="col-md-6">
+								<label>
+									buttons
+									<input type="radio" checked="checked" name="cuff_sleeve">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									without buttons
+									<input type="radio" name="cuff_sleeve">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">CUFF PLEATS</p>
+							</div>
+							<div class="col-md-12">
+								<label>
+									none
+									<input type="radio" checked="checked" name="cuff_pleats">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_pleats">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cuff-pleats-one.png">
+									</div>
+									<p class="small help">one</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_pleats">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cuff-pleats-two.png">
+									</div>
+									<p class="small help">two</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_pleats">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cuff-pleats-three.png">
+									</div>
+									<p class="small help">three</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="next-style" ng-click="toggleStyleStep('Front')">
+									<span>next</span>
+									<i class="glyphicon glyphicon-menu-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Cuffs style -->
+
+					<!-- Start Front style -->
+					<div class="styles collar-view" ng-show="styleView=='Front'">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">FRONT POCKET</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_pocket">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/no-pocket.png">
+									</div>
+									<p class="small help">no pocket</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_pocket">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/one-pocket.png">
+									</div>
+									<p class="small help">one pocket</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_pocket">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/two-pocket.png">
+									</div>
+									<p class="small help">two pocket</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">FRONT POCKET STYLE</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_pocket_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/western-style-flap-pocket.png">
+									</div>
+									<p class="small help">western style flap pocket</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_pocket_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/square-style-pocket.png">
+									</div>
+									<p class="small help">square style pocket</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_pocket_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/rounded-style-pocket.png">
+									</div>
+									<p class="small help">rounded style pocket</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_pocket_style">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/classic-style-pocket.png">
+									</div>
+									<p class="small help">classic style pocket</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="next-style" ng-click="toggleStyleStep('Back')">
+									<span>next</span>
+									<i class="glyphicon glyphicon-menu-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Front style -->
+
+					<!-- Start Back style -->
+					<div class="styles collar-view" ng-show="styleView=='Back'">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">BACK PLEATS</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="back_pleats">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/straight-back.png">
+									</div>
+									<p class="small help">straight back</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="back_pleats">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/back-darts.png">
+									</div>
+									<p class="small help">back darts</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="back_pleats">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/box-pleats.png">
+									</div>
+									<p class="small help">box pleats</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="back_pleats">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/side-pleats.png">
+									</div>
+									<p class="small help">side pleats</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">TAIL</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="back_tail">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/standard-tail.png">
+									</div>
+									<p class="small help">standard tail</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="back_tail">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/straight-shirt-bottom.png">
+									</div>
+									<p class="small help">straight shirt bottom</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">TAIL LENGTH</p>
+							</div>
+							<div class="col-md-4">
+								<label>
+									standard
+									<input type="radio" checked="checked" name="back_tail_length">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label>
+									short
+									<input type="radio" name="back_tail_length">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label>
+									long
+									<input type="radio" name="back_tail_length">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">YOKE</p>
+							</div>
+							<div class="col-md-4">
+								<label>1 panel
+									<input type="radio" checked="checked" name="back_yoke">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label>2 panel
+									<input type="radio" name="back_yoke">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="next-style" ng-click="toggleStyleStep('Buttons')">
+									<span>next</span>
+									<i class="glyphicon glyphicon-menu-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Back style -->
+
+					<!-- Start Buttons style -->
+					<div class="styles buttons-view" ng-show="styleView=='Buttons'">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">BUTTONS</p>
+							</div>
+							<div class="col-md-12">
+								<label>
+									white
+									<input type="radio" checked="checked" name="buttons_button">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">STITCHING STYLE</p>
+							</div>
+							<div class="col-md-4">
+								<label class="stitch">
+									<input type="radio" checked="checked" name="buttons_stitching">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/stitching-1.png">
+									</div>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="stitch">
+									<input type="radio" name="buttons_stitching">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/stitching-2.png">
+									</div>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="stitch">
+									<input type="radio" name="buttons_stitching">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/stitching-3.png">
+									</div>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="next-style" ng-click="toggleStyleStep('Extras')">
+									<span>next</span>
+									<i class="glyphicon glyphicon-menu-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Buttons style -->
+
+					<!-- Start Extras style -->
+					<div class="styles extras-view" ng-show="styleView=='Extras'">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">MONOGRAM</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_monogram">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/serif.png">
+									</div>
+									<p class="small help">serif</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_monogram">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/san-serif.png">
+									</div>
+									<p class="small help">san serif</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_monogram">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">cursive</p>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									left cuff
+									<input type="radio" name="extra_cuff">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									right cuff
+									<input type="radio" name="extra_cuff">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-12">
+								<label>
+									match fabric
+									<input type="radio" checked="checked" name="extra_fabric">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_fabric">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_fabric">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_fabric">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_fabric">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">CONTRAST CUFF AND COLLAR</p>
+							</div>
+							<div class="col-md-6">
+								<label>
+									yes
+									<input type="radio" checked="checked" name="extra_contrast">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									no
+									<input type="radio" name="extra_contrast">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">BUTTON HOLE COLOR</p>
+							</div>
+							<div class="col-md-12">
+								<label>
+									match fabric
+									<input type="radio" checked="checked" name="extra_buton_hole">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_buton_hole">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_buton_hole">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_buton_hole">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="extra_buton_hole">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">FRONT BIB</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_front_bib">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/short-bib.png">
+									</div>
+									<p class="small help">short bib</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_front_bib">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/long-bib.png">
+									</div>
+									<p class="small help">long bib</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_front_bib">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/no-bib.png">
+									</div>
+									<p class="small help">no bib</p>
+								</label>
+							</div>
+						</div>
+					</div>
+					<!-- End Extras style -->
+				</div>
+				<div class="col-md-8 col-no-padding">
+					<img ng-src="{{baseUrl}}assets/img/placeholder/shirt-1.png" class="product-image">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+		<div class="item">
+			<p><span class="number">1</span> QUALITY</p>
+			<p class="level">level one <span>+</span></p>
+		</div>
+		<div class="item">
+			<p><span class="number">2</span> YOUR FABRIC</p>
+			<img ng-src="{{baseUrl}}assets/img/placeholder/fabric/5.png">
+			<p>DIAMOND <br>AND ROYAL BLUE</p>
+			<h6>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat </h6>
+		</div>
+		<div class="item">
+			<p><span class="number">3</span> <button class="btn btn-green">START DESIGN</button></p>
+		</div>
+		<div class="item">
+			<p><span class="number">4</span> ADD MEASUREMENTS</p>
+		</div>
+		<div class="item text-center">
+			<span class="btn-review-shirt">review<br>shirt</span>
+		</div>
+		<div class="item text-center">
+			<p class="small">TOTAL</p>
+			<p class="total">$109.00</p>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</body>
+</html>
