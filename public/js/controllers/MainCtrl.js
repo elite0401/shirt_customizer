@@ -1,6 +1,6 @@
 angular.module('MainCtrl', []).controller('MainController', function($scope) {
 
-	$scope.baseUrl = 'https://3b6f713d.ngrok.io/';
+	$scope.baseUrl = 'https://f784a8cb.ngrok.io/';
 	console.log('main controller.....');
 
 	$scope.qualityStepShown = true;

@@ -1,5 +1,5 @@
 function AppSettings() {
     return {
-        shopPath: 'https://3b6f713d.ngrok.io',
+        shopPath: 'https://f784a8cb.ngrok.io',
     }
 }
