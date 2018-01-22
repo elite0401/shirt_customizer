@@ -34,7 +34,15 @@ module.exports = function(app) {
 	});
 
 	app.get('/fabrics', function(req, res) {
+		var params = req.query;
 		var query = "SELECT * FROM tbl_schema_fabric";
+		if (params.filter) {
+			console.log(params.filter);
+			query += " WHERE `type`='"+params.filter+"'";
+		}
+		if (params.sort && params.sort == 'a-z') {
+			query += " ORDER BY name ASC";
+		}
 		connection.query(query, function(err, rows, fields) {
 			if (err) throw err;
 			res.json({result: rows});

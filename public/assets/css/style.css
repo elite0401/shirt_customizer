@@ -218,6 +218,15 @@ input[type=text]:focus {
     position: relative;
     margin-left: 20px;
 }
+.fabric-row {
+	cursor: pointer;
+}
+.fabric-row:hover img,
+.fabric-row img.active{
+	border: 2px solid #3a8475;
+	-webkit-box-shadow: 3px 3px 10px 5px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 10px 5px rgba(0,0,0,0.3);
+}
 .next-step {
 	border-radius: 50%;
 	border: 1px solid #231f20;
@@ -422,6 +431,9 @@ input[type=text]:focus {
 }
 #step2 .heading a {
 	letter-spacing: 3px;
+}
+#step2 .heading a:focus {
+	text-decoration: none;
 }
 #step2 .heading a.active {
 	border-bottom: 1px solid #231f20;

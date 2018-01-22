@@ -1,4 +1,6 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, AppSettings) {
+
+	var vm = this;
 
 	$scope.baseUrl = 'https://f784a8cb.ngrok.io/';
 	console.log('main controller.....');
@@ -23,6 +25,23 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 	$scope.styleView = 'Collar';
 
 	$scope.valQuality = 'starter';
+	$scope.valFabric = {};
+	$scope.valDesign = {
+		collar_style: '',
+		collar_height: '',
+		collar_stiffness: '',
+		cuff_preferance: '',
+		cuff_sleeve_tab_buttons: '',
+		cuff_pleats: '',
+		front_pocket: '',
+		front_pocket_style: '',
+		back_pleats: '',
+		back_tail: '',
+		back_tail_length: '',
+		back_yoke: '',
+		buttons_button: '',
+		buttons_stitching_style: ''
+	};
 
 	$scope.scBarConfig = {
 		autoHideScrollbar: false,
@@ -34,36 +53,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 		setHeight: 400,
 		scrollInertia: 0
 	};
-	$scope.fabrics = [
-		{'id': 1, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/1.png'},
-		{'id': 2, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/2.png'},
-		{'id': 3, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/3.png'},
-		{'id': 4, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/4.png'},
-		{'id': 5, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/5.png'},
-		{'id': 6, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/6.png'},
-		{'id': 7, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/7.png'},
-		{'id': 8, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/8.png'},
-		{'id': 9, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/9.png'},
-		{'id': 10, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/10.png'},
-		{'id': 11, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/11.png'},
-		{'id': 12, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/12.png'},
-		{'id': 13, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/13.png'},
-		{'id': 14, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/14.png'},
-		{'id': 15, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/15.png'},
-		{'id': 16, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/16.png'},
-		{'id': 17, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/17.png'},
-		{'id': 18, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/18.png'},
-		{'id': 19, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/19.png'},
-		{'id': 20, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/20.png'},
-		{'id': 21, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/21.png'},
-		{'id': 22, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/22.png'},
-		{'id': 23, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/23.png'},
-		{'id': 24, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/24.png'},
-		{'id': 25, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/21.png'},
-		{'id': 26, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/22.png'},
-		{'id': 27, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/23.png'},
-		{'id': 28, 'name': 'Hudson White Wrinkle-Resistant Twill', 'image': $scope.baseUrl + 'assets/img/placeholder/fabric/24.png'}
-	];
 
 	$scope.goNextStep = function() {
 		if ($scope.qualityStepView || (!$scope.fabricStepView && !$scope.designStepView && !$scope.measureStepView)) {
@@ -73,7 +62,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 		} else if ($scope.designStepView) {
 			$scope.toggleMeasureStep();
 		}
-	}
+	};
 
 	$scope.toggleQualityStep = function() {
 		$scope.qualityStepShown = true;
@@ -83,7 +72,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 		$scope.fabricStepView = false;
 		$scope.designStepView = false;
 		$scope.measureStepView = false;
-	}
+	};
 
 	$scope.toggleFabricStep = function() {
 		$scope.fabricStepShown = true;
@@ -93,9 +82,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 		$scope.qualityStepView = false;
 		$scope.designStepView = false;
 		$scope.measureStepView = false;
-	}
+	};
 
 	$scope.toggleDesignStep = function() {
+
 		$scope.designStepShown = true;
 
 		$scope.designStepView = true;
@@ -104,7 +94,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 		$scope.fabricStepView = false;
 		$scope.qualityStepView = false;
 		$scope.measureStepView = false;
-	}
+	};
 
 	$scope.toggleMeasureStep = function() {
 		$scope.measureStepShown = true;
@@ -116,7 +106,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 		$scope.designStepView = false;
 
 		$scope.styleView = 'Collar';
-	}
+		console.log($scope.valDesign);
+	};
 
 	$scope.toggleStyleStep = function(step) {
 		$scope.styleView = step;
@@ -146,5 +137,21 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 
 	$scope.selectQuality = function(quality) {
 		$scope.valQuality = quality;
-	}
+	};
+
+	$scope.selectFabric = function(fabric) {
+		$scope.valFabric = fabric;
+	};
+
+	$scope.loadFabrics = function(filter, sort) {
+		AppSettings.getFabric(filter, sort)
+			.success(function(fabrics) {
+				$scope.fabrics = fabrics.result;
+			})
+			.error(function(err) {
+				console.log(err);
+			});
+	};
+
+	$scope.loadFabrics(null, null);
 });
