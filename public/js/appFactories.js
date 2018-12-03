@@ -1,8 +1,8 @@
 function AppSettings($http) {
 	var service = {
-		shopPath: 'https://f784a8cb.ngrok.io'
+		shopPath: 'https://b8f215b9.ngrok.io'
 	}
-	var apiUrl = 'https://f784a8cb.ngrok.io';
+	var apiUrl = 'https://b8f215b9.ngrok.io';
 
 	service.getFabric = function(filter, sort) {
 		console.log(apiUrl);

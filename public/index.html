@@ -7,23 +7,23 @@
 	<title>Order Shirt</title>
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="https://f784a8cb.ngrok.io/libs/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://f784a8cb.ngrok.io/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css">
-	<link rel="stylesheet" href="https://f784a8cb.ngrok.io/assets/css/style.css">
+	<link rel="stylesheet" href="https://b8f215b9.ngrok.io/libs/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://b8f215b9.ngrok.io/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="https://b8f215b9.ngrok.io/assets/css/style.css">
 
 	<!-- JS -->
-	<script src="https://f784a8cb.ngrok.io/libs/jquery/dist/jquery.min.js"></script>
-	<script src="https://f784a8cb.ngrok.io/libs/angular/angular.min.js"></script>
-	<script src="https://f784a8cb.ngrok.io/libs/angular-route/angular-route.min.js"></script>
-	<script src="https://f784a8cb.ngrok.io/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="https://f784a8cb.ngrok.io/libs/ng-scrollbars/dist/scrollbars.min.js"></script>
+	<script src="https://b8f215b9.ngrok.io/libs/jquery/dist/jquery.min.js"></script>
+	<script src="https://b8f215b9.ngrok.io/libs/angular/angular.min.js"></script>
+	<script src="https://b8f215b9.ngrok.io/libs/angular-route/angular-route.min.js"></script>
+	<script src="https://b8f215b9.ngrok.io/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="https://b8f215b9.ngrok.io/libs/ng-scrollbars/dist/scrollbars.min.js"></script>
 
 	<!-- ANGULAR CUSTOM -->
-	<script src="https://f784a8cb.ngrok.io/js/controllers/MainCtrl.js"></script>
-	<script src="https://f784a8cb.ngrok.io/js/appRoutes.js"></script>
-	<script src="https://f784a8cb.ngrok.io/js/appDirectives.js"></script>
-	<script src="https://f784a8cb.ngrok.io/js/appFactories.js"></script>
-	<script src="https://f784a8cb.ngrok.io/js/app.js"></script>
+	<script src="https://b8f215b9.ngrok.io/js/controllers/MainCtrl.js"></script>
+	<script src="https://b8f215b9.ngrok.io/js/appRoutes.js"></script>
+	<script src="https://b8f215b9.ngrok.io/js/appDirectives.js"></script>
+	<script src="https://b8f215b9.ngrok.io/js/appFactories.js"></script>
+	<script src="https://b8f215b9.ngrok.io/js/app.js"></script>
 
 </head>
 <body ng-app="shirtApp" ng-controller="MainController">
@@ -55,11 +55,11 @@
 		</ul>
 	</header>
 	<div class="content-wrapper">
-		<div class="container step-wrap" ng-show="!designStepView">
+		<div class="container step-wrap" ng-show="!designStepView && (measureView == '')">
 			<div id="step-view">
 				<div class="heading">
 					<div class="next-step" ng-click="goNextStep()"><i class="glyphicon glyphicon-menu-left"></i></div>
-					<div class="title" ng-show="qualityStepView || (!fabricStepView && !designStepView && !measureStepView)">
+					<div class="title" ng-show="qualityStepView || (!fabricStepView && !designStepView && !measureStepView && (measureView == ''))">
 						<h1 class="engravers"><img ng-src="{{baseUrl}}assets/img/icon_quality.png"><span>STEP ONE : CHOOSE A QUALITY</span></h1>
 						<p>START building by following each step.</p>
 					</div>
@@ -99,7 +99,7 @@
 				</div>
 			</div>
 
-			<div id="step1" class="step" ng-show="qualityStepView || (!fabricStepView && !designStepView && !measureStepView)">
+			<div id="step1" class="step" ng-show="qualityStepView || (!fabricStepView && !designStepView && !measureStepView && (measureView == ''))">
 				<div class="row">
 					<div class="col-md-4">
 						<div class="panel panel-default" ng-class="{active: valQuality=='starter'}" ng-click="selectQuality('starter')">
@@ -166,7 +166,7 @@
 				<div ng-scrollbars ng-scrollbars-config="scBarConfig">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-md-9 fabric-row" ng-repeat="fabric in fabrics track by $index">
+							<div class="col-md-2 fabric-row" ng-repeat="fabric in fabrics track by $index">
 								<div ng-click="selectFabric(fabric)">
 									<img src="{{fabric.image}}" ng-class="{active: valFabric.id==fabric.id}">
 								</div>
@@ -181,10 +181,10 @@
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<ul>
-							<li><p>measure yourself <i class="glyphicon glyphicon-menu-right"></i></p></li>
-							<li><p>know your sizes? <i class="glyphicon glyphicon-menu-right"></i></p></li>
-							<li><p>edit from standard <i class="glyphicon glyphicon-menu-right"></i></p></li>
-							<li><p>measure a shirt <i class="glyphicon glyphicon-menu-right"></i></p></li>
+							<li><a href="javascript:;" ng-click="toggleMeasureView('measure_self');"><p>measure yourself <i class="glyphicon glyphicon-menu-right"></i></p></a></li>
+							<li><a href="javascript:;" ng-click="toggleMeasureView('know_size');"><p>know your sizes? <i class="glyphicon glyphicon-menu-right"></i></p></a></li>
+							<li><a href="javascript:;" ng-click="toggleMeasureView('from_standard');"><p>edit from standard <i class="glyphicon glyphicon-menu-right"></i></p></a></li>
+							<li><a href="javascript:;" ng-click="toggleMeasureView('measure_shirt');"><p>measure a shirt <i class="glyphicon glyphicon-menu-right"></i></p></a></li>
 						</ul>
 					</div>
 					<div class="col-md-1"></div>
@@ -289,6 +289,15 @@
 							</div>
 							<div class="col-md-4">
 								<label class="image">
+									<input type="radio" name="collar_style" ng-model="valDesign.collar_style" value="button down collar">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/wing-collar.png">
+									</div>
+									<p class="small help">button down collar</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
 									<input type="radio" name="collar_style" ng-model="valDesign.collar_style" value="concealed button down collar">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/wing-collar.png">
@@ -383,8 +392,15 @@
 							</div>
 							<div class="col-md-6">
 								<label>
-									stiff
-									<input type="radio" name="collar_stiffness" ng-model="valDesign.collar_stiffness" value="stiff">
+									softer
+									<input type="radio" name="collar_stiffness" ng-model="valDesign.collar_stiffness" value="softer">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									extra stiff
+									<input type="radio" name="collar_stiffness" ng-model="valDesign.collar_stiffness" value="extra stiff">
 									<span class="checkmark"></span>
 								</label>
 							</div>
@@ -408,74 +424,83 @@
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="square cuff">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="one button square cuff">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/square-cuff.png">
 									</div>
-									<p class="small help">square cuff</p>
+									<p class="small help">one button square cuff</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="round cuff">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="two button square cuff">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/square-cuff.png">
+									</div>
+									<p class="small help">two button square cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="adjustable square cuff">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/square-cuff.png">
+									</div>
+									<p class="small help">adjustable square cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="one button rounded cuff">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/round-cuff.png">
 									</div>
-									<p class="small help">round cuff</p>
+									<p class="small help">one button rounded cuff</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="bevelled cuff">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="two button rounded cuff">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/round-cuff.png">
+									</div>
+									<p class="small help">two button rounded cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="adjustable rounded cuff">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/round-cuff.png">
+									</div>
+									<p class="small help">adjustable rounded cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="one button bevelled cuff">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/bevelled-cuff.png">
 									</div>
-									<p class="small help">bevelled cuff</p>
+									<p class="small help">one button bevelled cuff</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="one button cuff">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="two button bevelled cuff">
 									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/one-button-cuff.png">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/bevelled-cuff.png">
 									</div>
-									<p class="small help">one button cuff</p>
+									<p class="small help">two button bevelled cuff</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="two button cuff">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="adjustable bevelled cuff">
 									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/two-button-cuff.png">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/bevelled-cuff.png">
 									</div>
-									<p class="small help">two button cuff</p>
-								</label>
-							</div>
-							<div class="col-md-4">
-								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="adjustable cuff">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/adjustable-cuff.png">
-									</div>
-									<p class="small help">adjustable cuff</p>
-								</label>
-							</div>
-							<div class="col-md-4">
-								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="double cuff">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/double-cuff.png">
-									</div>
-									<p class="small help">double cuff</p>
-								</label>
-							</div>
-							<div class="col-md-4">
-								<label class="image">
-									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="rounded double cuff">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/rounded-double-cuff.png">
-									</div>
-									<p class="small help">rounded double cuff</p>
+									<p class="small help">adjustable bevelled cuff</p>
 								</label>
 							</div>
 							<div class="col-md-4">
@@ -487,22 +512,40 @@
 									<p class="small help">button and cuff link</p>
 								</label>
 							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="french cuff">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/button-and-cuff-link.png">
+									</div>
+									<p class="small help">french cuff</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="cuff_preferance" ng-model="valDesign.cuff_preferance" value="rounded french cuff">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/button-and-cuff-link.png">
+									</div>
+									<p class="small help">rounded french cuff</p>
+								</label>
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<p class="small">SLEEVE TAB BUTTONS <i class="glyphicon glyphicon-question-sign"></i></p>
+								<p class="small">SLEEVE TAB OPTIONS <i class="glyphicon glyphicon-question-sign"></i></p>
 							</div>
 							<div class="col-md-6">
 								<label>
-									buttons
-									<input type="radio" checked="checked" name="cuff_sleeve_tab_buttons" ng-model="valDesign.cuff_sleeve_tab_buttons" value="buttons">
+									button
+									<input type="radio" checked="checked" name="cuff_sleeve_tab_options" ng-model="valDesign.cuff_sleeve_tab_options" value="button">
 									<span class="checkmark"></span>
 								</label>
 							</div>
 							<div class="col-md-6">
 								<label>
-									without buttons
-									<input type="radio" name="cuff_sleeve_tab_buttons" ng-model="valDesign.cuff_sleeve_tab_buttons" value="without buttons">
+									no button
+									<input type="radio" name="cuff_sleeve_tab_options" ng-model="valDesign.cuff_sleeve_tab_options" value="no button">
 									<span class="checkmark"></span>
 								</label>
 							</div>
@@ -520,29 +563,29 @@
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_pleats" ng-model="valDesign.cuff_pleats" value="one">
+									<input type="radio" name="cuff_pleats" ng-model="valDesign.cuff_pleats" value="one pleat">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cuff-pleats-one.png">
 									</div>
-									<p class="small help">one</p>
+									<p class="small help">one pleat</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_pleats" ng-model="valDesign.cuff_pleats" value="two">
+									<input type="radio" name="cuff_pleats" ng-model="valDesign.cuff_pleats" value="two pleat">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cuff-pleats-two.png">
 									</div>
-									<p class="small help">two</p>
+									<p class="small help">two pleat</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="cuff_pleats" ng-model="valDesign.cuff_pleats" value="three">
+									<input type="radio" name="cuff_pleats" ng-model="valDesign.cuff_pleats" value="three pleat">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cuff-pleats-three.png">
 									</div>
-									<p class="small help">three</p>
+									<p class="small help">three pleat</p>
 								</label>
 							</div>
 						</div>
@@ -597,38 +640,61 @@
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="front_pocket_style" ng-model="valDesign.front_pocket_style" value="western style flap pocket">
+									<input type="radio" name="front_pocket_style" ng-model="valDesign.front_pocket_style" value="flap pocket">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/western-style-flap-pocket.png">
 									</div>
-									<p class="small help">western style flap pocket</p>
+									<p class="small help">flap pocket</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="front_pocket_style" ng-model="valDesign.front_pocket_style" value="square style pocket">
+									<input type="radio" name="front_pocket_style" ng-model="valDesign.front_pocket_style" value="square">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/square-style-pocket.png">
 									</div>
-									<p class="small help">square style pocket</p>
+									<p class="small help">square</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="front_pocket_style" ng-model="valDesign.front_pocket_style" value="rounded style pocket">
+									<input type="radio" name="front_pocket_style" ng-model="valDesign.front_pocket_style" value="rounded">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/rounded-style-pocket.png">
 									</div>
-									<p class="small help">rounded style pocket</p>
+									<p class="small help">rounded</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">PLACKET</p>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_placket" ng-model="valDesign.front_placket" value="french placket">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/western-style-flap-pocket.png">
+									</div>
+									<p class="small help">french placket</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="front_pocket_style" ng-model="valDesign.front_pocket_style" value="classic style pocket">
+									<input type="radio" name="front_placket" ng-model="valDesign.front_placket" value="standard placket">
 									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/classic-style-pocket.png">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/square-style-pocket.png">
 									</div>
-									<p class="small help">classic style pocket</p>
+									<p class="small help">standard placket</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="front_placket" ng-model="valDesign.front_placket" value="hidden button placket">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/rounded-style-pocket.png">
+									</div>
+									<p class="small help">hidden button placket</p>
 								</label>
 							</div>
 						</div>
@@ -651,11 +717,11 @@
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="back_pleats" ng-model="valDesign.back_pleats" value="straight back">
+									<input type="radio" name="back_pleats" ng-model="valDesign.back_pleats" value="no pleats">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/straight-back.png">
 									</div>
-									<p class="small help">straight back</p>
+									<p class="small help">no pleats</p>
 								</label>
 							</div>
 							<div class="col-md-4">
@@ -669,11 +735,11 @@
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="back_pleats" ng-model="valDesign.back_pleats" value="box pleats">
+									<input type="radio" name="back_pleats" ng-model="valDesign.back_pleats" value="box pleat">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/box-pleats.png">
 									</div>
-									<p class="small help">box pleats</p>
+									<p class="small help">box pleat</p>
 								</label>
 							</div>
 							<div class="col-md-4">
@@ -692,24 +758,24 @@
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="back_tail" ng-model="valDesign.back_tail" value="standard tail">
+									<input type="radio" name="back_tail" ng-model="valDesign.back_tail" value="standard">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/standard-tail.png">
 									</div>
-									<p class="small help">standard tail</p>
+									<p class="small help">standard</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="back_tail" ng-model="valDesign.back_tail" value="straight shirt bottom">
+									<input type="radio" name="back_tail" ng-model="valDesign.back_tail" value="straight">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/straight-shirt-bottom.png">
 									</div>
-									<p class="small help">straight shirt bottom</p>
+									<p class="small help">straight</p>
 								</label>
 							</div>
 						</div>
-						<div class="row">
+						<!--<div class="row">
 							<div class="col-md-12 text-center">
 								<p class="small">TAIL LENGTH</p>
 							</div>
@@ -751,7 +817,7 @@
 									<span class="checkmark"></span>
 								</label>
 							</div>
-						</div>
+						</div>-->
 						<div class="row">
 							<div class="col-md-12">
 								<div class="next-style" ng-click="toggleStyleStep('Buttons')">
@@ -769,16 +835,16 @@
 							<div class="col-md-12 text-center">
 								<p class="small">BUTTONS</p>
 							</div>
-							<div class="col-md-12">
+							<!--<div class="col-md-12">
 								<label>
 									white
 									<input type="radio" checked="checked" name="buttons_button" ng-model="valDesign.buttons_button" value="white">
 									<span class="checkmark"></span>
 								</label>
-							</div>
+							</div>-->
 							<div class="col-md-3">
 								<label class="pattern">
-									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="blue">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp01">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
@@ -786,7 +852,7 @@
 							</div>
 							<div class="col-md-3">
 								<label class="pattern">
-									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="red">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp02">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
@@ -794,7 +860,7 @@
 							</div>
 							<div class="col-md-3">
 								<label class="pattern">
-									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="geen">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp03">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
@@ -802,7 +868,7 @@
 							</div>
 							<div class="col-md-3">
 								<label class="pattern">
-									<input type="radio" name="buttons_button">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp04">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
@@ -810,42 +876,130 @@
 							</div>
 							<div class="col-md-3">
 								<label class="pattern">
-									<input type="radio" name="buttons_button">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp05">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
 								</label>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 text-center">
-								<p class="small">STITCHING STYLE</p>
-							</div>
-							<div class="col-md-4">
-								<label class="stitch">
-									<input type="radio" checked="checked" name="buttons_stitching_style" ng-model="valDesign.buttons_stitching_style" value="style1">
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp06">
 									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/stitching-1.png">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
-									<span class="checkmark"></span>
 								</label>
 							</div>
-							<div class="col-md-4">
-								<label class="stitch">
-									<input type="radio" name="buttons_stitching_style" ng-model="valDesign.buttons_stitching_style" value="style2">
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp07">
 									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/stitching-2.png">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
-									<span class="checkmark"></span>
 								</label>
 							</div>
-							<div class="col-md-4">
-								<label class="stitch">
-									<input type="radio" name="buttons_stitching_style" ng-model="valDesign.buttons_stitching_style" value="style3">
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp08">
 									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/stitching-3.png">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
 									</div>
-									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp09">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp10">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp11">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sp12">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sn02">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sn09">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="sn10">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="cp02">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="cp06">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="pn02">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="pp02">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="pattern">
+									<input type="radio" name="buttons_button" ng-model="valDesign.buttons_button" value="pp10">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
+									</div>
 								</label>
 							</div>
 						</div>
@@ -864,177 +1018,715 @@
 					<div class="styles extras-view" ng-show="styleView=='Extras'">
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<p class="small">MONOGRAM</p>
+								<p class="small">MONOGRAM STYLE</p>
+							</div>
+							<div class="col-md-12">
+								<label>
+									none
+									<input type="radio" checked="checked" name="extra_monogram_style" ng-model="valDesign.extra_monogram_style" value="none">
+									<span class="checkmark"></span>
+								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="extra_monogram">
+									<input type="radio" name="extra_monogram_style" ng-model="valDesign.extra_monogram_style" value="style1">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/serif.png">
 									</div>
-									<p class="small help">serif</p>
+									<p class="small help">style1</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="extra_monogram">
+									<input type="radio" name="extra_monogram_style" ng-model="valDesign.extra_monogram_style" value="style2">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/san-serif.png">
 									</div>
-									<p class="small help">san serif</p>
+									<p class="small help">style2</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="extra_monogram">
+									<input type="radio" name="extra_monogram_style" ng-model="valDesign.extra_monogram_style" value="style3">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
 									</div>
-									<p class="small help">cursive</p>
+									<p class="small help">style3</p>
 								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">MONOGRAM LOCATION</p>
 							</div>
 							<div class="col-md-6">
 								<label>
 									left cuff
-									<input type="radio" name="extra_cuff">
+									<input type="radio" name="extra_monogram_location" ng-model="valDesign.extra_monogram_location" value="left cuff">
 									<span class="checkmark"></span>
 								</label>
 							</div>
 							<div class="col-md-6">
 								<label>
 									right cuff
-									<input type="radio" name="extra_cuff">
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-md-12">
-								<label>
-									match fabric
-									<input type="radio" checked="checked" name="extra_fabric">
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_fabric">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
-								</label>
-							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_fabric">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
-								</label>
-							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_fabric">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
-								</label>
-							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_fabric">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
-								</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 text-center">
-								<p class="small">CONTRAST CUFF AND COLLAR</p>
-							</div>
-							<div class="col-md-6">
-								<label>
-									yes
-									<input type="radio" checked="checked" name="extra_contrast">
+									<input type="radio" name="extra_monogram_location" ng-model="valDesign.extra_monogram_location" value="right cuff">
 									<span class="checkmark"></span>
 								</label>
 							</div>
 							<div class="col-md-6">
 								<label>
-									no
-									<input type="radio" name="extra_contrast">
+									top of pocket
+									<input type="radio" name="extra_monogram_location" ng-model="valDesign.extra_monogram_location" value="top of pocket">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									opposite 4th button
+									<input type="radio" name="extra_monogram_location" ng-model="valDesign.extra_monogram_location" value="opposite 4th button">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									opposite 5th button
+									<input type="radio" name="extra_monogram_location" ng-model="valDesign.extra_monogram_location" value="opposite 5th button">
 									<span class="checkmark"></span>
 								</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<p class="small">BUTTON HOLE COLOR</p>
+								<p class="small">MONOGRAM COLOR</p>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1801">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1801</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1880">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1880</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1784">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1784</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1828">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1828</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1845">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1845</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1682">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1682</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1945">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1945</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1741">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1741</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1841">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1841</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1803">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1803</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1866">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1866</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1816">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1816</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1831">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1831</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1835">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1835</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1843">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1843</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1750">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1750</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1860">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1860</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1859">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1859</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1622">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1622</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1765">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1765</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1747">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1747</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1874">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1874</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1966">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1966</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1728">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1728</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1970">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1970</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1810">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1810</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_monogram_color" ng-model="valDesign.extra_monogram_color" value="1800">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1800</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">MONOGRAM LETTERS</p>
 							</div>
 							<div class="col-md-12">
+								<input type="text" name="extra_monogram_letters" ng-model="valDesign.extra_monogram_letters" placeholder="ABC" value="" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">CONTRASTING COLLAR AND CUFF</p>
+							</div>
+							<div class="col-md-6">
 								<label>
-									match fabric
-									<input type="radio" checked="checked" name="extra_buton_hole">
+									none
+									<input type="radio" checked="checked" name="extra_contrast_collar_cuff" ng-model="valDesign.extra_contrast_collar_cuff" value="none">
 									<span class="checkmark"></span>
 								</label>
 							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_buton_hole">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
+							<div class="col-md-6">
+								<label>
+									inside collar
+									<input type="radio" name="extra_contrast_collar_cuff" ng-model="valDesign.extra_contrast_collar_cuff" value="inside collar">
+									<span class="checkmark"></span>
 								</label>
 							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_buton_hole">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
+							<div class="col-md-6">
+								<label>
+									outside collar
+									<input type="radio" name="extra_contrast_collar_cuff" ng-model="valDesign.extra_contrast_collar_cuff" value="outside collar">
+									<span class="checkmark"></span>
 								</label>
 							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_buton_hole">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
+							<div class="col-md-6">
+								<label>
+									inside cuff
+									<input type="radio" name="extra_contrast_collar_cuff" ng-model="valDesign.extra_contrast_collar_cuff" value="inside cuff">
+									<span class="checkmark"></span>
 								</label>
 							</div>
-							<div class="col-md-3">
-								<label class="pattern">
-									<input type="radio" name="extra_buton_hole">
-									<div class="thumb">
-										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/collar-1.png">
-									</div>
+							<div class="col-md-6">
+								<label>
+									outside cuff
+									<input type="radio" name="extra_contrast_collar_cuff" ng-model="valDesign.extra_contrast_collar_cuff" value="outside cuff">
+									<span class="checkmark"></span>
 								</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 text-center">
-								<p class="small">FRONT BIB</p>
+								<p class="small">CONTRASTING COLLAR AND CUFF FABRIC</p>
+							</div>
+							<div class="col-md-6">
+								<label>
+									white
+									<input type="radio" checked="checked" name="extra_contrast_collar_cuff_fabric" ng-model="valDesign.extra_contrast_collar_cuff_fabric" value="white">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label>
+									other fabric
+									<input type="radio" checked="checked" name="extra_contrast_collar_cuff_fabric" ng-model="valDesign.extra_contrast_collar_cuff_fabric" value="other">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">BUTTON THREAD STYLE</p>
+							</div>
+							<div class="col-md-4">
+								<label>
+									X style
+									<input type="radio" checked="checked" name="extra_buton_thread_style" ng-model="valDesign.extra_buton_thread_style" value="x style">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label>
+									Parrallel
+									<input type="radio" checked="checked" name="extra_buton_thread_style" ng-model="valDesign.extra_buton_thread_style" value="parrallel">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label>
+									Anchor
+									<input type="radio" checked="checked" name="extra_buton_thread_style" ng-model="valDesign.extra_buton_thread_style" value="anchor">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">BUTTON STITCH COLOR</p>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1801">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1801</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1880">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1880</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1784">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1784</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1828">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1828</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1845">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1845</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1682">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1682</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1945">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1945</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1741">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1741</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1841">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1841</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1803">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1803</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1866">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1866</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1816">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1816</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1831">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1831</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1835">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1835</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1843">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1843</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1750">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1750</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1860">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1860</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1859">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1859</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1622">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1622</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1765">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1765</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1747">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1747</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1874">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1874</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1966">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1966</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1728">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1728</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1970">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1970</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1810">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1810</p>
+								</label>
+							</div>
+							<div class="col-md-3">
+								<label class="image">
+									<input type="radio" name="extra_button_stitch_color" ng-model="valDesign.extra_button_stitch_color" value="1800">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/cursive.png">
+									</div>
+									<p class="small help">1800</p>
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<p class="small">TUXEDO BIB</p>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="extra_front_bib">
+									<input type="radio" name="extra_tuxedo_bib" ng-model="valDesign.extra_tuxedo_bib" value="short bib 1">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/short-bib.png">
 									</div>
-									<p class="small help">short bib</p>
+									<p class="small help">short bib 1</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="extra_front_bib">
+									<input type="radio" name="extra_tuxedo_bib" ng-model="valDesign.extra_tuxedo_bib" value="long bib 1">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/long-bib.png">
 									</div>
-									<p class="small help">long bib</p>
+									<p class="small help">long bib 1</p>
 								</label>
 							</div>
 							<div class="col-md-4">
 								<label class="image">
-									<input type="radio" name="extra_front_bib">
+									<input type="radio" name="extra_tuxedo_bib" ng-model="valDesign.extra_tuxedo_bib" value="short bib 2">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/short-bib.png">
+									</div>
+									<p class="small help">short bib 2</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_tuxedo_bib" ng-model="valDesign.extra_tuxedo_bib" value="long bib 2">
+									<div class="thumb">
+										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/long-bib.png">
+									</div>
+									<p class="small help">long bib 2</p>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="image">
+									<input type="radio" name="extra_tuxedo_bib" ng-model="valDesign.extra_tuxedo_bib" value="no bib">
 									<div class="thumb">
 										<img ng-src="{{baseUrl}}assets/img/placeholder/thumbs/no-bib.png">
 									</div>
@@ -1050,6 +1742,114 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="container-fluid measure-wrap" ng-show="measureView != ''">
+			
+			<div class="row">
+				<div class="col-md-2">
+					<div class="next-step" ng-click="toggleMeasureStep()"><i class="glyphicon glyphicon-menu-left"></i></div>
+				</div>
+
+				<!-- measure yourself -->
+				<div class="col-md-10" ng-show="measureView == 'measure_self'">
+					<h2>Measure yourself</h2>
+				</div>
+
+				<!-- measure shirt -->
+				<div class="col-md-10" ng-show="measureView == 'measure_shirt'">
+					<h2>Measure a shirt</h2>
+				</div>
+
+				<!-- know your size -->
+				<div class="col-md-10" ng-show="measureView == 'know_size'">
+					<h2>Know your sizes?</h2>
+				</div>
+
+				<!-- edit from standard -->
+				<div class="col-md-10" ng-show="measureView == 'from_standard'">
+					<h2>Edit from standard shirt size</h2>
+					<ul>
+						<li>
+							<p>
+								COLLAR
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel" accept-decimal=true></range-spinner>
+							</p>
+						</li>
+						<li>
+							<p>
+								CHEST
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel1" accept-decimal=true></range-spinner>
+							</p>
+						</li>
+						<li>
+							<p>
+								WAIST
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel2" accept-decimal=true></range-spinner>
+							</p>
+						</li>
+						<li>
+							<p>
+								SHOULDER
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel2" accept-decimal=true></range-spinner>
+							</p>
+						</li>
+						<li>
+							<p>
+								BICEP
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel2" accept-decimal=true></range-spinner>
+							</p>
+						</li>
+						<li>
+							<p>
+								SLEEVE LENGTH
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel2" accept-decimal=true></range-spinner>
+								<span class="right">L</span>
+								<label>make same length
+									<input type="radio" ng-checked="!m_sleeve_length" name="measure_sleeve_length_same" ng-model="m_sleeve_length" value="true">
+									<span class="checkmark"></span>
+								</label>
+								<label>make different lengths
+									<input type="radio" name="measure_sleeve_length_same" ng-model="m_sleeve_length" value="false">
+									<span class="checkmark"></span>
+								</label>
+								<span class="clearfix"></span>
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel10" accept-decimal=true ng-show="m_sleeve_length == 'true' || !m_sleeve_length" disabled=true></range-spinner>
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel11" accept-decimal=true ng-show="m_sleeve_length == 'false'" disabled=false></range-spinner>
+								<span class="right">R</span>
+								<span class="clearfix"></span>
+							</p>
+						</li>
+						<li>
+							<p>
+								CUFFS
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel2" accept-decimal=true></range-spinner>
+								<span class="right">L</span>
+								<label>make same length
+									<input type="radio" ng-checked="!m_cuffs" name="measure_cuffs_same" ng-model="m_cuffs" value="true">
+									<span class="checkmark"></span>
+								</label>
+								<label>make different lengths
+									<input type="radio" name="measure_cuffs_same" ng-model="m_cuffs" value="false">
+									<span class="checkmark"></span>
+								</label>
+								<span class="clearfix"></span>
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel10" accept-decimal=true ng-show="m_cuffs == 'true' || !m_cuffs" disabled=true></range-spinner>
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel11" accept-decimal=true ng-show="m_cuffs == 'false'" disabled=false></range-spinner>
+								<span class="right">R</span>
+								<span class="clearfix"></span>
+							</p>
+						</li>
+						<li>
+							<p>
+								SHIRT LENGTH
+								<range-spinner range-min="0" range-step="1" range-max="200" range-default-value="0.00" range-decimal-precision="2" range-model="rangeModel2" accept-decimal=true></range-spinner>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<div class="sidebar">
 		<div class="item">

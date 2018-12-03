@@ -25,8 +25,14 @@ body {
 a {
 	color: #231f20;
 }
+a:focus, a:hover {
+	text-decoration: none;
+}
 header {
 	background: #094438;
+}
+.right {
+	float: right;
 }
 .site-nav {
     display: flex;
@@ -293,7 +299,8 @@ input[type=text]:focus {
 .design-wrap .styles > .row:last-child {
 	border-bottom: 0;
 }
-.design-wrap .styles label {
+.design-wrap .styles label,
+.measure-wrap label {
 	font-size: 12px;
 	display: block;
     position: relative;
@@ -314,12 +321,14 @@ input[type=text]:focus {
 .design-wrap .styles label.image .thumb {
 	margin-bottom: 7px;
 }
-.design-wrap .styles label input {
+.design-wrap .styles label input,
+.measure-wrap label input {
 	position: absolute;
 	opacity: 0;
 	cursor: pointer;
 }
-.design-wrap .styles .checkmark {
+.design-wrap .styles .checkmark,
+.measure-wrap .checkmark {
 	position: absolute;
     top: 1px;
     left: 0;
@@ -344,10 +353,12 @@ input[type=text]:focus {
     left: 50%;
     transform: translateX(-50%);
 }
-.design-wrap .styles label:hover input ~ .checkmark {
+.design-wrap .styles label:hover input ~ .checkmark,
+.measure-wrap label:hover input ~ .checkmark {
 	background-color: #ccc;
 }
-.design-wrap .styles label input:checked ~ .checkmark {
+.design-wrap .styles label input:checked ~ .checkmark,
+.measure-wrap label input:checked ~ .checkmark {
 	background-color: #094439;
 }
 .design-wrap .styles label.image input:checked ~ .thumb {
@@ -365,16 +376,19 @@ input[type=text]:focus {
 .design-wrap .styles label.stitch input:checked ~ .thumb img {
 	filter: invert(100%);
 }
-.design-wrap .styles .checkmark:after {
+.design-wrap .styles .checkmark:after,
+.measure-wrap .checkmark:after {
 	content: "";
 	position: absolute;
 	display: none;
 }
-.design-wrap .styles label input:checked ~ .checkmark:after {
+.design-wrap .styles label input:checked ~ .checkmark:after,
+.measure-wrap label input:checked ~ .checkmark:after {
     display: block;
 }
 /* Style the indicator (dot/circle) */
-.design-wrap .styles label .checkmark:after {
+.design-wrap .styles label .checkmark:after,
+.measure-wrap label .checkmark:after {
  	top: 2px;
 	left: 2px;
 	width: 1px;
@@ -581,6 +595,65 @@ input[type=text]:focus {
 	top: -10px;
 	position: absolute;
 	z-index: -1;
+}
+.measure-wrap {
+	margin-top: 40px;
+}
+.measure-wrap ul {
+	-webkit-padding-start: 0;
+}
+.measure-wrap ul li{
+	list-style: none;
+	border-bottom: 1px solid #d4d4d4;
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+.measure-wrap ul li:first-child {
+	border-top: 1px solid #d4d4d4;
+}
+range-spinner {
+	float: right;
+}
+.rangespinner button {
+	-webkit-appearance: none;
+  border: 0;
+  background: #094438;
+  color: #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  padding: 0px;
+  line-height: 18px;
+  font-family: "Courier New", Courier, monospace;
+}
+.rangespinner .disable button {
+	background: #fff;
+	border: 1px solid #e6e7e8;
+	color: #e6e7e8;
+}
+.rangespinner .disable input {
+	color: #e6e7e8;
+}
+.rangespinner button:focus {
+	outline: none;
+}
+.rangespinner input[type=text] {
+	max-width: 60px;
+  margin: 0 15px;
+  text-align: center;
+  border: 0;
+}
+.measure-wrap label {
+	float: right;
+	margin-right: 25px;
+}
+.measure-wrap .checkmark {
+}
+.measure-wrap .right {
+	margin-right: 10px;
+	font-size: 10px;
+	margin-top: 5px;
+}
 }
 @media (min-width: 992px) {
 	.col-md-9 {

@@ -2,7 +2,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, App
 
 	var vm = this;
 
-	$scope.baseUrl = 'https://f784a8cb.ngrok.io/';
+	$scope.baseUrl = 'https://b8f215b9.ngrok.io/';
 	console.log('main controller.....');
 
 	$scope.qualityStepShown = true;
@@ -23,24 +23,36 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, App
 	$scope.stepExtras = false;
 
 	$scope.styleView = 'Collar';
+	$scope.measureView = '';
 
 	$scope.valQuality = 'starter';
 	$scope.valFabric = {};
 	$scope.valDesign = {
-		collar_style: '',
-		collar_height: '',
-		collar_stiffness: '',
-		cuff_preferance: '',
-		cuff_sleeve_tab_buttons: '',
-		cuff_pleats: '',
-		front_pocket: '',
-		front_pocket_style: '',
-		back_pleats: '',
-		back_tail: '',
-		back_tail_length: '',
-		back_yoke: '',
-		buttons_button: '',
-		buttons_stitching_style: ''
+		collar_style: 'classic collar',
+		collar_height: 'standard',
+		collar_stiffness: 'standard',
+		cuff_preferance: 'one button square cuff',
+		cuff_sleeve_tab_options: 'button',
+		cuff_pleats: 'two pleat',
+		front_pocket: 'no pocket',
+		front_pocket_style: 'rounded',
+		front_placket: 'standard placket',
+		back_pleats: 'no pleats',
+		back_tail: 'standard',
+		buttons_button: 'sp01',
+		extra_monogram_style: 'none',
+		extra_monogram_location: 'left cuff',
+		extra_monogram_color: '1801',
+		extra_monogram_letters: '',
+		extra_contrast_collar_cuff: 'none',
+		extra_contrast_collar_cuff_fabric: 'white',
+		extra_buton_thread_style: 'x style',
+		extra_button_stitch_color: '1801',
+		extra_tuxedo_bib: 'no bib'
+	};
+
+	$scope.valMeasure = {
+		
 	};
 
 	$scope.scBarConfig = {
@@ -106,7 +118,18 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, App
 		$scope.designStepView = false;
 
 		$scope.styleView = 'Collar';
+		$scope.measureView = '';
+
 		console.log($scope.valDesign);
+	};
+
+	$scope.toggleMeasureView = function(view) {
+		$scope.measureView = view;
+
+		$scope.qualityStepView = false;
+		$scope.fabricStepView = false;
+		$scope.designStepView = false;
+		$scope.measureStepView = false;
 	};
 
 	$scope.toggleStyleStep = function(step) {
